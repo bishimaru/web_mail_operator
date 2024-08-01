@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from django.utils import timezone
+from backports.zoneinfo import ZoneInfo
+
 
 os.environ['TZ'] = 'UTC'
 timezone.activate('UTC')
