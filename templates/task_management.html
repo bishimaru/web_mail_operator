@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="container">
+  <header class="leftNavigation">
+    <p>ナビゲーション</p>
+  </header>
+  <div class="content">
+      <p>コンテンツ</p>
+      <h2>{{ user.username }}のハッピーメールのデータ</h2>
+    <h3>ハッピーメールデータ</h3>
+    <ul>
+        {% for entry in happymail_entries %}
+            <li>名前: {{ entry.name }} - ログインID: {{ entry.login_id }} - 掲示板タイトル: {{ entry.post_title }}</li>
+        {% empty %}
+            <li>ハッピーメールデータがありません。</li>
+        {% endfor %}
+    </ul>
+  </div>
+
+</div>
+  
+<link href="{% static 'css/index.css' %}" rel="stylesheet" />
+
+{% include "footer.html" %}
+{% endblock %}
