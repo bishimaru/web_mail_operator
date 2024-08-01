@@ -138,3 +138,5 @@ LOGIN_REDIRECT_URL = '/task_management/'
 
 # ブラウザのタブを閉じるとセッションが終了するように設定
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+USE_TZ = True
