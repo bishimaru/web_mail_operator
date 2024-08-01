@@ -2,10 +2,28 @@ from pathlib import Path
 import os
 from django.utils import timezone
 from backports.zoneinfo import ZoneInfo
+import sys
 
+timezone.activate('UTC')
+USE_TZ = True
+TIME_ZONE = 'UTC'
+
+
+# pytzを無効にする
+try:
+    import pytz
+    sys.modules['pytz'] = None
+except ImportError:
+    pass
+
+# backports.zoneinfoを使用する
+try:
+    import zoneinfo
+except ImportError:
+    from backports import zoneinfo
 
 os.environ['TZ'] = 'UTC'
-timezone.activate('UTC')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -109,7 +127,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -132,4 +150,3 @@ LOGIN_REDIRECT_URL = '/task_management/'
 # ブラウザのタブを閉じるとセッションが終了するように設定
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-USE_TZ = True
