@@ -73,17 +73,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web_mail_operator.wsgi.application'
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'web_mail_operator',  # データベース名
-        'USER': 'root',  # データベースユーザー
-        'PASSWORD': '9xb3wmpc',  # データベースパスワード
-        'HOST': 'localhost',  # データベースホスト, 通常は 'localhost'
-        'PORT': '3306',  # データベースポート, 通常は '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'web_mail_operator',  # データベース名
+#         'USER': 'root',  # データベースユーザー
+#         'PASSWORD': '9xb3wmpc',  # データベースパスワード
+#         'HOST': 'localhost',  # データベースホスト, 通常は 'localhost'
+#         'PORT': '3306',  # データベースポート, 通常は '3306'
+#     }
+# }
 
 
 # Password validation
