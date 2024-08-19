@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import *
-
+from rest_framework import viewsets
+from .serializers import HappymailSerializer
 
 
 def manipulate_browser(request):
@@ -52,3 +53,7 @@ def login_view(request):
 
 def invalid_login_view(request):
     return render(request, 'invalid_login.html')
+
+class HappymailViewSet(viewsets.ModelViewSet):
+    queryset = Happymail.objects.all()
+    serializer_class = HappymailSerializer

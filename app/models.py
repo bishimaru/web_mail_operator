@@ -12,6 +12,7 @@ class Happymail(models.Model):
   conditions_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
   post_title = models.CharField(max_length=20,blank=True, null=True, verbose_name="掲示板タイトル")
   post_contents = models.TextField(blank=True, null=True, verbose_name="掲示板内容文")
+  is_active = models.BooleanField(default=True, verbose_name="アクティブ")
 
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
