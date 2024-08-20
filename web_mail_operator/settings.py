@@ -124,7 +124,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# DEBUG = True
+DEBUG = True
 DEBUG = False
 STATIC_URL = '/static/'
 
