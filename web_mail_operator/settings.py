@@ -12,8 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-lljt#=aed=%1gnf2fy6fw&s1hbpv&j0(#%=k7pon3nd#k^j2f*'
 
-DEBUG = True
-# DEBUG = False
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -125,16 +124,14 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
+# DEBUG = True
+DEBUG = False
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # STATIC_ROOT は、本番環境で collectstatic コマンドを実行した際に、すべての静的ファイルが収集されるディレクトリです。
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 # Default primary key field type
