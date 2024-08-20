@@ -124,8 +124,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 STATIC_URL = '/static/'
 
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
