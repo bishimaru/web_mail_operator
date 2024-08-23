@@ -16,4 +16,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'), 
     path('invalid_login/', views.invalid_login_view, name='invalid_login'), 
     path('api/', include(router.urls)),
+    path('api/user-data/', views.UserDataView.as_view(), name='user-data'),
+
 ]
