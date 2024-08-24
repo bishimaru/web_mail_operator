@@ -126,7 +126,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 DEBUG = True
 # DEBUG = False
 STATIC_URL = '/static/'
@@ -135,10 +134,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # STATIC_ROOT は、本番環境で collectstatic コマンドを実行した際に、すべての静的ファイルが収集されるディレクトリです。
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
