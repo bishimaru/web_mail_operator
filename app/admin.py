@@ -1,8 +1,9 @@
 from django.contrib import admin
 from .models import Pcmax, Happymail
-
+from .forms import *
 # Register your models here.
 class PcmaxAdmin(admin.ModelAdmin):
+    form = PcmaxForm
     list_display = ('name', 'login_id', 'post_title')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = ('user_id', 'name', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message',
@@ -41,6 +42,7 @@ class PcmaxAdmin(admin.ModelAdmin):
 admin.site.register(Pcmax, PcmaxAdmin)
 
 class HappymailAdmin(admin.ModelAdmin):
+    form = HappymailForm
     list_display = ['name', 'post_title','is_active']  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = [
