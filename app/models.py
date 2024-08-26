@@ -17,6 +17,14 @@ class Happymail(models.Model):
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
   
+  def save(self, *args, **kwargs):
+    # スーパーユーザーは制限をスキップ
+    if self.is_active and not self.user_id.is_superuser:
+        active_count = Happymail.objects.filter(user_id=self.user_id, is_active=True).count()
+        if active_count >= 8 and not self.pk:  # 新しいレコードの作成を検証
+            raise ValueError('Active Happymail records are limited to 8 per user.')
+    super().save(*args, **kwargs)
+
   class Meta:
     managed = True
     db_table = 'happymail'
@@ -92,6 +100,14 @@ class Pcmax(models.Model):
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
   
+  def save(self, *args, **kwargs):
+    # スーパーユーザーは制限をスキップ
+    if self.is_active and not self.user_id.is_superuser:
+        active_count = Pcmax.objects.filter(user_id=self.user_id, is_active=True).count()
+        if active_count >= 8 and not self.pk:  # 新しいレコードの作成を検証
+            raise ValueError('Active Pcmax records are limited to 8 per user.')
+    super().save(*args, **kwargs)
+
   class Meta:
     managed = True
     db_table = 'pcmax'
