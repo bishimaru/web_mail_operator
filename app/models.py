@@ -88,7 +88,7 @@ class Pcmax(models.Model):
   sake = models.CharField(max_length=20, choices=sake_list, null=True, blank=True)
   process_before_meeting = models.CharField(max_length=20, choices=process_before_meeting_list, null=True, blank=True)
   first_date_cost = models.CharField(max_length=20, choices=first_date_cost_list, null=True, blank=True)
-
+  is_active = models.BooleanField(default=True, verbose_name="アクティブ")
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
   
