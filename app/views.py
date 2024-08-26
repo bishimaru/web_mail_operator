@@ -71,14 +71,11 @@ class UserDataView(APIView):
         try:
             user = User.objects.get(username=name)
             if user.check_password(password):
-                # Happymailデータを取得
-                happymail_data = Happymail.objects.filter(user_id=user.id)
+                happymail_data = Happymail.objects.filter(user_id=user.id, is_active=True)
                 happymail_serializer = HappymailSerializer(happymail_data, many=True)
 
-                # PCMaxデータを取得
-                pcmax_data = Pcmax.objects.filter(user_id=user.id)
+                pcmax_data = Pcmax.objects.filter(user_id=user.id, is_active=True)
                 pcmax_serializer = PcmaxSerializer(pcmax_data, many=True)
-
                 # 両方のデータを一緒に返す
                 return Response({
                     'happymail': happymail_serializer.data,

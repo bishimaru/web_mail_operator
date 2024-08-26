@@ -34,7 +34,9 @@ class PcmaxAdmin(admin.ModelAdmin):
     def get_list_display(self, request):
         # スーパーユーザーのみ user_id を表示
         if request.user.is_superuser:
-            return ['user_id'] + self.list_display
+            # return ['user_id'] + self.list_display
+            return ['user_id'] + list(self.list_display) 
+            
         return self.list_display
 admin.site.register(Pcmax, PcmaxAdmin)
 
