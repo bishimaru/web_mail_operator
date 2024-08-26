@@ -54,7 +54,6 @@ admin.site.register(Pcmax, PcmaxAdmin)
 
 
 class HappymailAdmin(admin.ModelAdmin):
-    # form = HappymailForm
     list_display = ['name', 'post_title', 'is_active']
     fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'is_active']
 
@@ -64,22 +63,6 @@ class HappymailAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(user_id=request.user)
 
-    def response_add(self, request, obj, post_url_continue=None):
-        if not obj.pk:  # 新しいオブジェクトの場合のみ
-            obj.user_id = request.user
-        
-        # is_activeがTrueの場合に制限を適用
-        if obj.is_active and not obj.user_id.is_superuser:
-            active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).count()
-            if active_count >= 8:
-                messages.error(request, 'アクティブな Happymail キャラを 8 つ以上持つことはできません。')
-                # 成功メッセージを削除
-                messages.set_level(request, messages.WARNING)  # メッセージのレベルを一時的に変更
-                response = super().response_add(request, obj, post_url_continue)
-                messages.set_level(request, messages.SUCCESS)  # メッセージのレベルを元に戻す
-                return HttpResponseRedirect(reverse('admin:app_happymail_changelist'))
-        return super().response_add(request, obj, post_url_continue)
-    
     def save_model(self, request, obj, form, change):
         if not obj.pk:  # 新しいオブジェクトの場合のみ
             obj.user_id = request.user
@@ -88,10 +71,26 @@ class HappymailAdmin(admin.ModelAdmin):
         if obj.is_active and not obj.user_id.is_superuser:
             active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).count()
             if active_count >= 8:
+                messages.error(request, 'アクティブな Happymail キャラを 8 つ以上持つことはできません。')
+                
                 return  # データの保存をキャンセル
 
         super().save_model(request, obj, form, change)
 
+    def response_add(self, request, obj, post_url_continue=None):
+        messages.set_level(request, messages.WARNING)  # メッセージのレベルを一時的に変更
+        response = super().response_add(request, obj, post_url_continue)
+        messages.set_level(request, messages.SUCCESS)  # メッセージのレベルを元に戻す
+        return HttpResponseRedirect(reverse('admin:app_happymail_changelist'))
+    
+    def response_change(self, request, obj):
+        # メッセージのレベルを一時的に変更
+        messages.set_level(request, messages.WARNING)
+        response = super().response_change(request, obj)
+        # メッセージのレベルを元に戻す
+        messages.set_level(request, messages.SUCCESS)
+        return HttpResponseRedirect(reverse('admin:app_happymail_changelist'))
+    
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
         if not request.user.is_superuser:
@@ -102,6 +101,5 @@ class HappymailAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return ['user_id'] + self.list_display
         return self.list_display
-
 
 admin.site.register(Happymail, HappymailAdmin)
