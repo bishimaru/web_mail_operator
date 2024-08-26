@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import *
+from django.contrib import messages
 
 class HappymailForm(forms.ModelForm):
     class Meta:
@@ -12,12 +13,11 @@ class HappymailForm(forms.ModelForm):
         user = cleaned_data.get("user_id")
         is_active = cleaned_data.get("is_active")
 
-        # is_active が True であればチェックを行う
         if is_active and user and not user.is_superuser:
             active_count = Happymail.objects.filter(user_id=user, is_active=True).count()
             if active_count >= 8:
-                raise ValidationError('You cannot have more than 8 active Happymail records.')
-
+               messages.error('アクティブな Happymail キャラを 8 つ以上持つことはできません。')
+               return  # データの保存をキャンセル
         return cleaned_data
 
 class PcmaxForm(forms.ModelForm):
