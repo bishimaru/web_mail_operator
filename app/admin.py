@@ -67,30 +67,30 @@ class HappymailAdmin(admin.ModelAdmin):
         if not obj.pk:  # 新しいオブジェクトの場合のみ
             obj.user_id = request.user
         
-        # is_activeがTrueの場合に制限を適用
+        # 編集または新規作成の場合
         if obj.is_active and not obj.user_id.is_superuser:
-            active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).count()
+            # 他の is_active=True のデータの数を数える（自身を除く）
+            active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).exclude(pk=obj.pk).count()
             if active_count >= 8:
-                messages.error(request, 'アクティブな Happymail キャラを 8 つ以上持つことはできません。')
-                
+                messages.error(request, 'アクティブな Happymail キャラが　上限を超えました。')
                 return  # データの保存をキャンセル
 
         super().save_model(request, obj, form, change)
 
     def response_add(self, request, obj, post_url_continue=None):
-        messages.set_level(request, messages.WARNING)  # メッセージのレベルを一時的に変更
-        response = super().response_add(request, obj, post_url_continue)
-        messages.set_level(request, messages.SUCCESS)  # メッセージのレベルを元に戻す
-        return HttpResponseRedirect(reverse('admin:app_happymail_changelist'))
-    
-    def response_change(self, request, obj):
-        # メッセージのレベルを一時的に変更
+        # 成功メッセージを抑制し、リダイレクト
         messages.set_level(request, messages.WARNING)
-        response = super().response_change(request, obj)
-        # メッセージのレベルを元に戻す
+        response = super().response_add(request, obj, post_url_continue)
         messages.set_level(request, messages.SUCCESS)
         return HttpResponseRedirect(reverse('admin:app_happymail_changelist'))
-    
+
+    def response_change(self, request, obj):
+        # 成功メッセージを抑制し、リダイレクト
+        messages.set_level(request, messages.WARNING)
+        response = super().response_change(request, obj)
+        messages.set_level(request, messages.SUCCESS)
+        return HttpResponseRedirect(reverse('admin:app_happymail_changelist'))
+
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
         if not request.user.is_superuser:
