@@ -6,15 +6,11 @@ from django.urls import path, include
 
 
 router = DefaultRouter()
-router.register(r'happymail', views.HappymailViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('manipulate/', views.manipulate_browser, name='manipulate_browser'),
+    path('admin/', admin.site.urls, name='admin'),
     path('', views.IndexView.as_view(), name='index'),
-    path('task_management/', views.task_management, name='task_management'),  
-    path('login/', views.login_view, name='login'), 
-    path('invalid_login/', views.invalid_login_view, name='invalid_login'), 
+    path('how_to_use/', views.how_to_use_view, name='how_to_use'), 
     path('api/', include(router.urls)),
     path('api/user-data/', views.UserDataView.as_view(), name='user-data'),
 

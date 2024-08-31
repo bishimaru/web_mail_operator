@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="container">
+  <h2>Mac版
+  </h2>
+   <div class="download-link">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Version</th>
+          <th>ダウンロード</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>β</td>
+          <td><a href="{% static 'downloads/desktop_mail_operator.zip' %}" download>
+            <img src="{% static 'img/download_icon.png' %}" alt="Download Icon" /></a></td>
+        </tr>
+      </tbody>
+    </table>
+    
+</div>
+</div>
+  
+<link href="{% static 'css/index.css' %}" rel="stylesheet" />
+
+{% include "footer.html" %}
+{% endblock %}

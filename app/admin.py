@@ -1,13 +1,33 @@
 from django.contrib import admin
-from .models import Pcmax, Happymail
-from .forms import *
+from .models import *
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.admin import UserAdmin
+
+
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
+    verbose_name_plural = 'ユーザーオプション'
+
+class UserAdmin(UserAdmin):
+    # 表示するフィールドを定義
+    fieldsets = (
+        (None, {'fields': (
+            'username', 'password', 'email', 'is_staff', 
+            'is_superuser', 'user_permissions', 'is_active', 
+            'last_login', 'date_joined'
+        )}),
+    )
+    inlines = (UserProfileInline,)
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+
 
 class PcmaxAdmin(admin.ModelAdmin):
-    # form = PcmaxForm
     list_display = ('name', 'login_id', 'post_title')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = ('user_id', 'name', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message',

@@ -1,5 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from datetime import timedelta
+from django.utils import timezone
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    Registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
+
+    # このコードをDjangoの定期的なタスクスケジューラー
+    # （例えばCeleryやDjango Q）を使用して、
+    # 定期的に全てのUserProfileをチェックして、
+    # is_activeフィールドを更新する。
+    def check_and_update_is_active(self):
+        """日付から1ヶ月経ったらis_activeをFalseにする"""
+        if self.some_date and (self.some_date + timedelta(days=30)) < timezone.now().date():
+            self.user.is_active = False
+            self.save()
+
+    def __str__(self):
+        return self.user.username
 
 class Happymail(models.Model):
   id = models.BigAutoField(primary_key=True)
