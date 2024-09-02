@@ -74,7 +74,7 @@ admin.site.register(Pcmax, PcmaxAdmin)
 
 
 class HappymailAdmin(admin.ModelAdmin):
-    list_display = ['name', 'post_title', 'is_active']
+    list_display = ['name', 'post_title', 'login_id', 'is_active']
     fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'is_active']
 
     def get_queryset(self, request):
