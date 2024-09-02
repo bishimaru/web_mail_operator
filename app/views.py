@@ -27,16 +27,22 @@ class UserDataView(APIView):
     def post(self, request):
         name = request.data.get('name')
         password = request.data.get('password')
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print(f"{name}   {password}")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
         try:
             user = User.objects.get(username=name)
+            
             if not user.is_active:
-                return Response({'error': '有効期限が切れています。'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': '有効期限が切れています。'}, status=status.HTTP_204_NO_CONTENT)
 
             if user.check_password(password):
+                
                 happymail_data = Happymail.objects.filter(user_id=user.id, is_active=True)
                 happymail_serializer = HappymailSerializer(happymail_data, many=True)
-
+                print(777)
+                print(happymail_serializer.data,)
                 pcmax_data = Pcmax.objects.filter(user_id=user.id, is_active=True)
                 pcmax_serializer = PcmaxSerializer(pcmax_data, many=True)
                 # 両方のデータを一緒に返す
