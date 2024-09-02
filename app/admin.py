@@ -86,9 +86,9 @@ class HappymailAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.pk:  # 新しいオブジェクトの場合のみ
             obj.user_id = request.user
-        
+        user_profile = UserProfile.objects.get(user=request.user)
         # 編集または新規作成の場合
-        if obj.is_active and not obj.user_id.is_superuser:
+        if obj.is_active and not user_profile.lifted_account_number:
             # 他の is_active=True のデータの数を数える（自身を除く）
             active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).exclude(pk=obj.pk).count()
             if active_count >= 8:

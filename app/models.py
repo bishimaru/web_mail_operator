@@ -9,6 +9,7 @@ from django.utils import timezone
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     Registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
+    lifted_account_number = models.BooleanField(default=False, verbose_name="アカウント数制限解除(16)")
 
     # このコードをDjangoの定期的なタスクスケジューラー
     # （例えばCeleryやDjango Q）を使用して、
