@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Happymail, Pcmax
+from .models import *
 
 class HappymailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,4 +9,9 @@ class HappymailSerializer(serializers.ModelSerializer):
 class PcmaxSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pcmax
+        fields = '__all__'
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
         fields = '__all__'
