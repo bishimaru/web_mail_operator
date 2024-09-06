@@ -40,7 +40,7 @@ class Happymail(models.Model):
   post_title = models.CharField(max_length=20,blank=True, null=True, verbose_name="掲示板タイトル")
   post_contents = models.TextField(blank=True, null=True, verbose_name="掲示板内容文")
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
-
+  chara_image = models.ImageField(upload_to='chara_images/', null=True, blank=True, verbose_name="送付画像")
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
 

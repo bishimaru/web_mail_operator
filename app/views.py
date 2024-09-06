@@ -39,9 +39,10 @@ class UserDataView(APIView):
                 userprofile_data = UserProfile.objects.filter(user=user)
                 userprofile_serializer = UserProfileSerializer(userprofile_data, many=True)
                 happymail_data = Happymail.objects.filter(user_id=user.id, is_active=True)
-                happymail_serializer = HappymailSerializer(happymail_data, many=True)
-                # print(777)
-                # print(userprofile_serializer.data)
+                # happymail_serializer = HappymailSerializer(happymail_data, many=True)
+                # リクエストコンテキストをシリアライザに渡す
+                happymail_serializer = HappymailSerializer(happymail_data, many=True, context={'request': request})
+                
                 pcmax_data = Pcmax.objects.filter(user_id=user.id, is_active=True)
                 pcmax_serializer = PcmaxSerializer(pcmax_data, many=True)
                 

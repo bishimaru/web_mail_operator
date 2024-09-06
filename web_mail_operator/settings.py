@@ -144,3 +144,6 @@ LOGIN_REDIRECT_URL = '/task_management/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # settings.py
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

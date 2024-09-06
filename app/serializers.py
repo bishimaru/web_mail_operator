@@ -6,6 +6,12 @@ class HappymailSerializer(serializers.ModelSerializer):
         model = Happymail
         fields = '__all__'
 
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
+
 class PcmaxSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pcmax
