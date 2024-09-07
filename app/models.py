@@ -12,6 +12,7 @@ class UserProfile(models.Model):
     lifted_account_number = models.BooleanField(default=False, verbose_name="アカウント数制限解除(16)")
     gmail_account = models.EmailField(null=True, blank=True, verbose_name="Gmailアドレス")
     gmail_account_password = models.CharField(max_length=30, blank=True, null=True, verbose_name="Gmailアプリパスワード")
+    check_mail_happymail = models.BooleanField(default=False, verbose_name="ハッピー新着チェック")
     
     
     
@@ -41,6 +42,8 @@ class Happymail(models.Model):
   post_contents = models.TextField(blank=True, null=True, verbose_name="掲示板内容文")
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
   chara_image = models.ImageField(upload_to='chara_images/', null=True, blank=True, verbose_name="送付画像")
+  fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
+  second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
 
@@ -116,6 +119,7 @@ class Pcmax(models.Model):
   process_before_meeting = models.CharField(max_length=20, choices=process_before_meeting_list, null=True, blank=True)
   first_date_cost = models.CharField(max_length=20, choices=first_date_cost_list, null=True, blank=True)
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
+  
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
   
