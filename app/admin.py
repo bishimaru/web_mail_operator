@@ -30,12 +30,13 @@ admin.site.register(User, UserAdmin)
 class PcmaxAdmin(admin.ModelAdmin):
     list_display = ('name', 'login_id', 'post_title')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
-    fields = ('user_id', 'name', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message',
-              'mail_img','fst_mail',
-              'second_message', 'condition_message',  'date_of_birth', 'self_promotion', 
-              'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
-              'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
-              'first_date_cost'
+    fields = (
+        'name', 'user_id', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message','mail_img',
+            #   'fst_mail',
+            #   'second_message', 'condition_message',  'date_of_birth', 'self_promotion', 
+            #   'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
+            #   'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
+            #   'first_date_cost'
               )
 
     def get_queryset(self, request):
@@ -63,13 +64,17 @@ class PcmaxAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.pk:  # 新しいオブジェクトの場合のみ
             obj.user_id = request.user
-        
+        # UserProfileが存在しない場合は作成
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         # is_activeがTrueの場合に制限を適用
-        if obj.is_active and not obj.user_id.is_superuser:
-            active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).count()
+        if obj.is_active and not user_profile.lifted_account_number:
+            active_count = Pcmax.objects.filter(user_id=obj.user_id, is_active=True).count()
             if active_count >= 8:
-                messages.error(request, 'You cannot have more than 8 active Happymail records.')
+                messages.error(request, 'You cannot have more than 8 active Pcmax records.')
                 return
+            
+        super().save_model(request, obj, form, change)
+
 admin.site.register(Pcmax, PcmaxAdmin)
 
 
