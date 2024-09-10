@@ -15,7 +15,6 @@ class UserProfile(models.Model):
     check_mail_happymail = models.BooleanField(default=False, verbose_name="ハッピー新着チェック")
     
     
-    
     # このコードをDjangoの定期的なタスクスケジューラー
     # （例えばCeleryやDjango Q）を使用して、
     # 定期的に全てのUserProfileをチェックして、
@@ -103,12 +102,12 @@ class Pcmax(models.Model):
   second_message = models.TextField(blank=True, null=True)
   condition_message = models.TextField(blank=True, null=True)
   return_foot_message = models.TextField(blank=True, null=True, verbose_name="足跡返し")
-  date_of_birth = models.IntegerField(blank=True, null=True)
-  self_promotion = models.TextField(blank=True, null=True)
-  height = models.IntegerField(blank=True, null=True)
-  body_shape = models.CharField(max_length=20, choices=body_shape_list, null=True, blank=True)
-  blood_type = models.CharField(max_length=5, choices=blood_type_list, null=True, blank=True)
-  activity_area = models.CharField(max_length=5, choices=activity_area_list, null=True, blank=True)
+  date_of_birth = models.IntegerField(blank=True, null=True, verbose_name="誕生日")
+  self_promotion = models.TextField(blank=True, null=True, verbose_name="自己紹介")
+  height = models.IntegerField(blank=True, null=True, verbose_name="身長")
+  body_shape = models.CharField(max_length=20, choices=body_shape_list, null=True, blank=True, verbose_name="体重")
+  blood_type = models.CharField(max_length=5, choices=blood_type_list, null=True, blank=True, verbose_name="血液型")
+  activity_area = models.CharField(max_length=5, choices=activity_area_list, null=True, blank=True, verbose_name="活動地域")
   detail_activity_area = models.CharField(max_length=10, blank=True, null=True)
   profession = models.TextField(blank=True, null=True)
   freetime = models.CharField(max_length=20, choices=freetime_list, null=True, blank=True)
