@@ -32,11 +32,11 @@ class PcmaxAdmin(admin.ModelAdmin):
     # 編集可能なフィールドを指定（必要に応じて）
     fields = (
         'name', 'user_id', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message','mail_img',
-            #   'fst_mail',
-            #   'second_message', 'condition_message',  'date_of_birth', 'self_promotion', 
-            #   'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
-            #   'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
-            #   'first_date_cost'
+        'fst_mail', 'second_message', 'condition_message', 
+        'date_of_birth', 'self_promotion', 
+        'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
+        'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
+        'first_date_cost'
               )
 
     def get_queryset(self, request):
