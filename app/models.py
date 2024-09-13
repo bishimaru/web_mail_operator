@@ -8,23 +8,13 @@ from django.utils import timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    Registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
+    registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
     lifted_account_number = models.BooleanField(default=False, verbose_name="アカウント数制限解除(16)")
     gmail_account = models.EmailField(null=True, blank=True, verbose_name="Gmailアドレス")
     gmail_account_password = models.CharField(max_length=30, blank=True, null=True, verbose_name="Gmailアプリパスワード")
     check_mail_happymail = models.BooleanField(default=False, verbose_name="ハッピー新着チェック")
     
     
-    # このコードをDjangoの定期的なタスクスケジューラー
-    # （例えばCeleryやDjango Q）を使用して、
-    # 定期的に全てのUserProfileをチェックして、
-    # is_activeフィールドを更新する。
-    def check_and_update_is_active(self):
-        """日付から1ヶ月経ったらis_activeをFalseにする"""
-        if self.some_date and (self.some_date + timedelta(days=30)) < timezone.now().date():
-            self.user.is_active = False
-            self.save()
-
     def __str__(self):
         return self.user.username
 

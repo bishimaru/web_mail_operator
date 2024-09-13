@@ -13,6 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', views.IndexView.as_view(), name='index'),
     path('how_to_use/', views.how_to_use_view, name='how_to_use'), 
+    path('terms_of_service/', views.terms_of_service_view, name='terms_of_service'), 
     path('api/', include(router.urls)),
     path('api/user-data/', views.UserDataView.as_view(), name='user-data'),
 

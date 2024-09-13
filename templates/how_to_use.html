@@ -3,9 +3,30 @@
 
 {% block main %}
 <div class="container">
-  <h2>Mac版
-  </h2>
-   <div class="download-link">
+  <p>下記からzipファイルをダウンロードして、README.pdfを参照してください。</p>
+  
+  <h1>リリース版</h1>
+  <div class="download-link"></div>
+  <h2>Mac</h2>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Version</th>
+        <th>ダウンロード</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr>
+        <td>1.0</td>
+        <td><a href="{% static 'downloads/20240914_release.zip' %}" download>
+          <img src="{% static 'img/download_icon.png' %}" alt="Download Icon" /></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <h1>ベータ版</h1>
+  <h2>Mac</h2>
+  
     <table class="styled-table">
       <thead>
         <tr>
@@ -15,19 +36,20 @@
       </thead>
       <tbody>
         <tr>
-          <td>β</td>
-          <td><a href="{% static 'downloads/meruopetyan.zip' %}" download>
-            <img src="{% static 'img/download_icon.png' %}" alt="Download Icon" /></a></td>
-        </tr>
-        <tr>
           <td>β02</td>
           <td><a href="{% static 'downloads/meruopetyan69010.zip' %}" download>
             <img src="{% static 'img/download_icon.png' %}" alt="Download Icon" /></a></td>
         </tr>
+        <tr>
+          <td>β</td>
+          <td><a href="{% static 'downloads/meruopetyan.zip' %}" download>
+            <img src="{% static 'img/download_icon.png' %}" alt="Download Icon" /></a></td>
+        </tr>
+        
       </tbody>
     </table>
-    
-</div>
+  
+  </div>
 </div>
   
 <link href="{% static 'css/index.css' %}" rel="stylesheet" />

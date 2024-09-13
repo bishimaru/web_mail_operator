@@ -22,6 +22,11 @@ def how_to_use_view(request):
     template_name = 'how_to_use.html'
     return render(request, template_name)
 
+def terms_of_service_view(request):
+    template_name = 'terms_of_service.html'
+    return render(request, template_name)
+
+
 
 class UserDataView(APIView):
     def post(self, request):
