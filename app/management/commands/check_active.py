@@ -10,7 +10,7 @@ class Command(BaseCommand):
         now = timezone.now().date()
         profiles = UserProfile.objects.filter(registration_subscribe_date__isnull=False)
         for profile in profiles:
-            if profile.registration_subscribe_date + timedelta(days=30) < now:
+            if profile.registration_subscribe_date + timedelta(days=14) < now:
                 # self.stdout.write(f"{profile.user.username}は有効期限が切れました。{now}")
                 profile.user.is_active = False
                 profile.user.save()
