@@ -13,6 +13,7 @@ class UserProfileInline(admin.StackedInline):
     verbose_name_plural = 'ユーザーオプション'
 
 class UserAdmin(UserAdmin):
+    list_display = ('username', 'is_active', 'get_registration_subscribe_date')  
     # 表示するフィールドを定義
     fieldsets = (
         (None, {'fields': (
@@ -22,6 +23,12 @@ class UserAdmin(UserAdmin):
         )}),
     )
     inlines = (UserProfileInline,)
+
+    # registration_subscribe_dateを取得するメソッド
+    def get_registration_subscribe_date(self, obj):
+        return obj.userprofile.registration_subscribe_date if hasattr(obj, 'userprofile') else None
+    get_registration_subscribe_date.short_description = '課金日'  # 管理画面での表示名を設定
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
