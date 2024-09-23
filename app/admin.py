@@ -87,7 +87,7 @@ admin.site.register(Pcmax, PcmaxAdmin)
 
 class HappymailAdmin(admin.ModelAdmin):
     list_display = ['name', 'post_title', 'login_id', 'is_active']
-    fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'fst_message', 'second_message', 'is_active', 'chara_image']
+    fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'fst_message',  'is_active', 'chara_image']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -130,10 +130,10 @@ class HappymailAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             fields = [field for field in fields if field not in ('id', 'user_id')]
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
-        print(777)
-        print(user_profile.check_mail_happymail)
+        # print(777)
+        # print(user_profile.check_mail_happymail)
         # if not user_profile.check_mail_happymail:
-        #     print('mohu')
+            # fields = [field for field in fields if field not in ('fst_message', )]
             # fields = [field for field in fields if field not in ('fst_message', 'second_message')]
         return fields
 
