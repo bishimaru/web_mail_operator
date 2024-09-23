@@ -132,9 +132,9 @@ class HappymailAdmin(admin.ModelAdmin):
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         print(777)
         print(user_profile.check_mail_happymail)
-        if not user_profile.check_mail_happymail:
-            print('mohu')
-            fields = [field for field in fields if field not in ('fst_message', 'second_message')]
+        # if not user_profile.check_mail_happymail:
+        #     print('mohu')
+            # fields = [field for field in fields if field not in ('fst_message', 'second_message')]
         return fields
 
     def get_list_display(self, request):
