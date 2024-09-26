@@ -27,7 +27,7 @@ class Happymail(models.Model):
   fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
   return_foot_message = models.TextField(blank=True, null=True, verbose_name="足跡返し")
   conditions_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
-  post_title = models.CharField(max_length=20,blank=True, null=True, verbose_name="掲示板タイトル")
+  post_title = models.CharField(max_length=30,blank=True, null=True, verbose_name="掲示板タイトル")
   post_contents = models.TextField(blank=True, null=True, verbose_name="掲示板内容文")
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
   chara_image = models.ImageField(upload_to='chara_images/', null=True, blank=True, verbose_name="送付画像")
