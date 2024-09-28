@@ -92,6 +92,8 @@ class Pcmax(models.Model):
   second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
   condition_message = models.TextField(blank=True, null=True, verbose_name="アドレス内1stメール")
   return_foot_message = models.TextField(blank=True, null=True, verbose_name="足跡返し")
+  mail_address = models.EmailField(blank=True, null=True, verbose_name="メールアドレス")
+  
   date_of_birth = models.IntegerField(blank=True, null=True, verbose_name="誕生日")
   self_promotion = models.TextField(blank=True, null=True, verbose_name="自己紹介")
   height = models.IntegerField(blank=True, null=True, verbose_name="身長")
