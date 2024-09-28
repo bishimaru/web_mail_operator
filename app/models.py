@@ -93,7 +93,7 @@ class Pcmax(models.Model):
   condition_message = models.TextField(blank=True, null=True, verbose_name="アドレス内1stメール")
   return_foot_message = models.TextField(blank=True, null=True, verbose_name="足跡返し")
   mail_address = models.EmailField(blank=True, null=True, verbose_name="Gmaliアドレス")
-  gmail_password = models.TextField(blank=True, null=True, verbose_name="Gmailパスワード")
+  gmail_password = models.CharField(max_length=20,blank=True, null=True, verbose_name="Gmailパスワード")
   date_of_birth = models.IntegerField(blank=True, null=True, verbose_name="誕生日")
   self_promotion = models.TextField(blank=True, null=True, verbose_name="自己紹介")
   height = models.IntegerField(blank=True, null=True, verbose_name="身長")
