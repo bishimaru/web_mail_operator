@@ -35,10 +35,10 @@ admin.site.register(User, UserAdmin)
 
 
 class PcmaxAdmin(admin.ModelAdmin):
-    list_display = ('name', 'login_id', 'post_title')  # 表示するフィールドを指定
+    list_display = ('name', 'login_id', 'post_title', 'is_active')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = (
-        'name', 'user_id', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message','mail_img',
+        'name', 'user_id', 'login_id', 'password',  'is_active', 'post_title', 'post_content', 'return_foot_message','mail_img',
         'fst_mail', 'second_message', 'condition_message', 'mail_address', 'gmail_password',
         'date_of_birth', 'self_promotion', 
         'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
@@ -103,8 +103,7 @@ class HappymailAdmin(admin.ModelAdmin):
         # UserProfileが存在しない場合は作成
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         # 編集または新規作成の場合
-        print(888)
-        print(user_profile.lifted_account_number)
+        
         if obj.is_active and not user_profile.lifted_account_number:
             # 他の is_active=True のデータの数を数える（自身を除く）
             active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).exclude(pk=obj.pk).count()
