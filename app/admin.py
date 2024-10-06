@@ -74,6 +74,8 @@ class PcmaxAdmin(admin.ModelAdmin):
         # UserProfileが存在しない場合は作成
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         # is_activeがTrueの場合に制限を適用
+        print(777)
+        print(user_profile.lifted_account_number)
         if obj.is_active and not user_profile.lifted_account_number:
             active_count = Pcmax.objects.filter(user_id=obj.user_id, is_active=True).count()
             if active_count >= 8:
@@ -101,6 +103,8 @@ class HappymailAdmin(admin.ModelAdmin):
         # UserProfileが存在しない場合は作成
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         # 編集または新規作成の場合
+        print(888)
+        print(user_profile.lifted_account_number)
         if obj.is_active and not user_profile.lifted_account_number:
             # 他の is_active=True のデータの数を数える（自身を除く）
             active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).exclude(pk=obj.pk).count()
