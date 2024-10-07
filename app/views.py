@@ -32,11 +32,10 @@ class UserDataView(APIView):
     def post(self, request):
         name = request.data.get('name')
         password = request.data.get('password')
-       
-
         try:
             user = User.objects.get(username=name)
             user_email = user.email
+            
             if not user.is_active:
                 return Response({'error': '有効期限が切れています。'}, status=status.HTTP_204_NO_CONTENT)
 
@@ -63,5 +62,29 @@ class UserDataView(APIView):
                 }, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid password'}, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+    def patch(self, request, *args, **kwargs):
+        user_id = kwargs.get('user_id')  # URLからuser_idを取得
+        print(777)
+        print(user_id)
+        try:
+            user = User.objects.get(id=user_id)
+            user_profile = UserProfile.objects.get(user=user)
+            
+            # リクエストからh_schedule_timeを取得して更新
+            h_schedule_time = request.data.get('h_schedule_time', [])
+            if not isinstance(h_schedule_time, list):
+                return Response({'error': 'h_schedule_time should be a list'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # h_schedule_timeを更新
+            user_profile.h_schedule_time = h_schedule_time
+            user_profile.save()
+            
+            return Response({'message': 'h_schedule_time updated successfully'}, status=status.HTTP_200_OK)
+        
+        except UserProfile.DoesNotExist:
+            return Response({'error': 'UserProfile not found'}, status=status.HTTP_404_NOT_FOUND)
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)

@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from datetime import timedelta
 from django.utils import timezone
+from django.contrib.postgres.fields import ArrayField  # PostgreSQLの場合
+
 
 
 class UserProfile(models.Model):
@@ -14,12 +16,12 @@ class UserProfile(models.Model):
     gmail_account_password = models.CharField(max_length=30, blank=True, null=True, verbose_name="Gmailアプリパスワード")
     check_mail_happymail = models.BooleanField(default=False, verbose_name="ハッピー新着チェック")
     recieve_mailaddress = models.EmailField(null=True, blank=True, verbose_name="受信用メールアドレス")
-    
+    h_schedule_time = ArrayField(models.CharField(max_length=15), blank=True, null=True, verbose_name="ハッピー予約時間") 
     class Meta:
       managed = True
       verbose_name = "ユーザーオプション"
       verbose_name_plural = "ユーザーオプション"
-      
+
     def __str__(self):
         return self.user.username
 

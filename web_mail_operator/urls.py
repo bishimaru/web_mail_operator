@@ -16,7 +16,7 @@ urlpatterns = [
     path('terms_of_service/', views.terms_of_service_view, name='terms_of_service'), 
     path('api/', include(router.urls)),
     path('api/user-data/', views.UserDataView.as_view(), name='user-data'),
-
+    path('api/user-data/<int:user_id>/', views.UserDataView.as_view(),),  # PATCHリクエスト用のURL
 ]
 # 開発環境でメディアファイルを提供
 if settings.DEBUG:
