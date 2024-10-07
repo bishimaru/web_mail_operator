@@ -7,6 +7,25 @@ from django.urls import reverse
 from django.contrib.auth.admin import UserAdmin
 
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'registration_subscribe_date', ]
+    fields = ['gmail_account', 'gmail_account_password', 'recieve_mailaddress']  # 表示・編集可能なフィールドを指定
+    
+    # 任意でクエリセットを制限
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)
+
+    # スーパーユーザーでない場合、特定のフィールドを隠す
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        if not request.user.is_superuser:
+            fields = [field for field in fields if field not in ('id', 'user')]
+        return fields
+admin.site.register(UserProfile, UserProfileAdmin)
+
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
@@ -35,10 +54,10 @@ admin.site.register(User, UserAdmin)
 
 
 class PcmaxAdmin(admin.ModelAdmin):
-    list_display = ('name', 'login_id', 'post_title', 'is_active')  # 表示するフィールドを指定
+    list_display = ('name', 'login_id', 'post_title')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = (
-        'name', 'user_id', 'login_id', 'password',  'is_active', 'post_title', 'post_content', 'return_foot_message','mail_img',
+        'name', 'user_id', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message','mail_img',
         'fst_mail', 'second_message', 'condition_message', 'mail_address', 'gmail_password',
         'date_of_birth', 'self_promotion', 
         'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
@@ -74,8 +93,6 @@ class PcmaxAdmin(admin.ModelAdmin):
         # UserProfileが存在しない場合は作成
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         # is_activeがTrueの場合に制限を適用
-        print(777)
-        print(user_profile.lifted_account_number)
         if obj.is_active and not user_profile.lifted_account_number:
             active_count = Pcmax.objects.filter(user_id=obj.user_id, is_active=True).count()
             if active_count >= 8:
@@ -103,7 +120,6 @@ class HappymailAdmin(admin.ModelAdmin):
         # UserProfileが存在しない場合は作成
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         # 編集または新規作成の場合
-        
         if obj.is_active and not user_profile.lifted_account_number:
             # 他の is_active=True のデータの数を数える（自身を除く）
             active_count = Happymail.objects.filter(user_id=obj.user_id, is_active=True).exclude(pk=obj.pk).count()
