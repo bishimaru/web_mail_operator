@@ -54,7 +54,7 @@ admin.site.register(User, UserAdmin)
 
 
 class PcmaxAdmin(admin.ModelAdmin):
-    list_display = ('name', 'login_id', 'post_title')  # 表示するフィールドを指定
+    list_display = ('name', 'login_id', 'post_title', 'memo')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = (
         'name', 'user_id', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message','mail_img',
@@ -62,7 +62,7 @@ class PcmaxAdmin(admin.ModelAdmin):
         'date_of_birth', 'self_promotion', 
         'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
         'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
-        'first_date_cost'
+        'first_date_cost', 'memo'
               )
 
     def get_queryset(self, request):
@@ -105,8 +105,8 @@ admin.site.register(Pcmax, PcmaxAdmin)
 
 
 class HappymailAdmin(admin.ModelAdmin):
-    list_display = ['name', 'post_title', 'login_id', 'is_active']
-    fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'fst_message',  'is_active', 'chara_image']
+    list_display = ['name', 'post_title', 'login_id', 'is_active', 'memo']
+    fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'fst_message',  'is_active', 'chara_image', 'memo']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

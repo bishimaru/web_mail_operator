@@ -40,6 +40,7 @@ class Happymail(models.Model):
   chara_image = models.ImageField(upload_to='chara_images/', null=True, blank=True, verbose_name="送付画像")
   fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
   second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
+  memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
 
@@ -109,14 +110,16 @@ class Pcmax(models.Model):
   activity_area = models.CharField(max_length=5, choices=activity_area_list, null=True, blank=True, verbose_name="活動地域")
   detail_activity_area = models.CharField(max_length=10, blank=True, null=True)
   profession = models.CharField(blank=True, null=True, verbose_name="職業")
-  freetime = models.CharField(max_length=20, choices=freetime_list, null=True, blank=True)
-  car_ownership = models.CharField(max_length=20, choices=car_ownership_list, null=True, blank=True)
-  smoking = models.CharField(max_length=20, choices=smoking_list, null=True, blank=True)
-  ecchiness_level = models.CharField(max_length=20, choices=ecchiness_level_list, null=True, blank=True)
-  sake = models.CharField(max_length=20, choices=sake_list, null=True, blank=True)
-  process_before_meeting = models.CharField(max_length=20, choices=process_before_meeting_list, null=True, blank=True)
-  first_date_cost = models.CharField(max_length=20, choices=first_date_cost_list, null=True, blank=True)
+  freetime = models.CharField(max_length=20, choices=freetime_list, null=True, blank=True, verbose_name="ヒマな時間帯")
+  car_ownership = models.CharField(max_length=20, choices=car_ownership_list, null=True, blank=True, verbose_name="車の所有")
+  smoking = models.CharField(max_length=20, choices=smoking_list, null=True, blank=True, verbose_name="喫煙")
+  ecchiness_level = models.CharField(max_length=20, choices=ecchiness_level_list, null=True, blank=True, verbose_name="エッチ度")
+  sake = models.CharField(max_length=20, choices=sake_list, null=True, blank=True, verbose_name="お酒")
+  process_before_meeting = models.CharField(max_length=20, choices=process_before_meeting_list, null=True, blank=True, verbose_name="会うまでのプロセス")
+  first_date_cost = models.CharField(max_length=20, choices=first_date_cost_list, null=True, blank=True, verbose_name="初回デート費用")
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
+  memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
+
   
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
