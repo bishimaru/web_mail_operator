@@ -54,7 +54,7 @@ admin.site.register(User, UserAdmin)
 
 
 class PcmaxAdmin(admin.ModelAdmin):
-    list_display = ('name', 'login_id', 'post_title', 'memo')  # 表示するフィールドを指定
+    list_display = ('name', 'login_id', 'post_title', 'is_active','memo')  # 表示するフィールドを指定
     # 編集可能なフィールドを指定（必要に応じて）
     fields = (
         'name', 'user_id', 'login_id', 'password',   'post_title', 'post_content', 'return_foot_message','mail_img',
@@ -62,7 +62,7 @@ class PcmaxAdmin(admin.ModelAdmin):
         'date_of_birth', 'self_promotion', 
         'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
         'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
-        'first_date_cost', 'memo'
+        'first_date_cost', 'memo','is_active'
               )
 
     def get_queryset(self, request):
