@@ -108,7 +108,7 @@ class HappymailAdmin(admin.ModelAdmin):
     list_display = ['name', 'post_title', 'login_id', 'is_active', 'memo']
     fields = [
         'user_id', 'name', 'login_id', 'password', 'post_title', 
-        'post_contents', 'return_foot_message', 'fst_message',  'is_active', 
+        'post_contents', 'return_foot_message', 'fst_message', 'second_message', 'is_active', 
         'chara_image', "age", "activity_area", "detail_activity_area",
         "birth_place", "blood_type", "constellation", "height",
         "style", "looks", "cup", "job", "education", "holiday",
