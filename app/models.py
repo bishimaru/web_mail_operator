@@ -26,6 +26,35 @@ class UserProfile(models.Model):
         return self.user.username
 
 class Happymail(models.Model):
+  age_list = [
+    ("ナイショ","ナイショ"),
+    ("18～19歳", "18～19歳"), 
+    ("20代前半", "20代前半"),
+    ("20代半ば","20代半ば"), 
+    ("20代後半", "20代後半"), 
+  ]
+  activity_area_list = [
+    ("東京都", "東京都")
+    # "神奈川県", "埼玉県", "千葉県"
+    ]
+  blood_type_list = [
+    ("指定しない","指定しない"), ("Ａ型","Ａ型"), 
+    ("Ｂ型","Ｂ型"), ("Ｏ型","Ｏ型"), ( "ＡＢ型", "ＡＢ型"), 
+    ("わからない","わからない"), ("ナイショ","ナイショ")
+    ]
+  height_list = [
+    ("150～154","150～154"), ("155～159","155～159"), 
+    ("160～164","160～164"), ("165～169","165～169"), ("ナイショ", "ナイショ")
+  ]
+  sake_list = [
+    ("たしなむ程度","たしなむ程度"), ("飲まない","飲まない"), ("ときどき飲む","ときどき飲む"), ("ナイショ","ナイショ"),
+      ]
+  car_ownership_list = [("ない", "ない"), ("ナイショ", "ナイショ")]
+  brothers_and_sisters_list = [("長女", "長女"), ("間っ子", "間っ子"), ("末っ子", "末っ子"), ("一人っ子", "一人っ子"),  ("その他", "その他"), ]
+  until_we_met_list = [("まずは会いたい", "まずは会いたい"), ("気が合えば会いたい", "気が合えば会いたい"), ]
+  date_expenses_list = [("男性が全て払う", "男性が全て払う"), ("男性が多めに払う", "男性が多めに払う"), ("割り勘", "割り勘"), ("持っている人が払う", "持っている人が払う"),  ("相手と相談して決める", "相手と相談して決める"), ]
+  
+  
   id = models.BigAutoField(primary_key=True)
   user_id = models.ForeignKey(User, on_delete=models.CASCADE)
   name = models.CharField(max_length=30, blank=True, null=True, verbose_name="名前")
@@ -40,7 +69,31 @@ class Happymail(models.Model):
   chara_image = models.ImageField(upload_to='chara_images/', null=True, blank=True, verbose_name="送付画像")
   fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
   second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
+  age = models.CharField(max_length=6, choices=age_list, blank=True, null=True, verbose_name="年齢")
+  activity_area = models.CharField(max_length=5, choices=activity_area_list, null=True, blank=True, verbose_name="居住地")
+  detail_activity_area = models.CharField(max_length=10, blank=True, null=True, verbose_name="詳細エリア")
+  birth_place  = models.CharField(max_length=10, blank=True, null=True, verbose_name="出身地")
+  blood_type = models.CharField(max_length=5, choices=blood_type_list, null=True, blank=True, verbose_name="血液型")
+  constellation = models.CharField(max_length=6,  null=True, blank=True, verbose_name="星座")
+  height = models.CharField(max_length=10,  choices=height_list, null=True, blank=True, verbose_name="身長")
+  style = models.CharField(max_length=10,  null=True, blank=True, verbose_name="スタイル")
+  looks = models.CharField(max_length=10,  null=True, blank=True, verbose_name="ルックス")
+  cup = models.CharField(max_length=10,  null=True, blank=True, verbose_name="カップ")
+  job = models.CharField(max_length=25,  null=True, blank=True, verbose_name="職業")
+  education  = models.CharField(max_length=25,  null=True, blank=True, verbose_name="学歴")
+  holiday = models.CharField(max_length=20,  null=True, blank=True, verbose_name="休日")
+  relationship_status = models.CharField(max_length=20,  null=True, blank=True, verbose_name="交際ステータス")
+  having_children = models.CharField(max_length=10,  null=True, blank=True, verbose_name="子ども")
+  intention_to_marry = models.CharField(max_length=20,  null=True, blank=True, verbose_name="結婚に対する意思")
+  smoking = models.CharField(max_length=20, null=True, blank=True, verbose_name="たばこ")
+  sake = models.CharField(max_length=20, choices=sake_list, null=True, blank=True, verbose_name="お酒")
+  car_ownership = models.CharField(max_length=20, choices=car_ownership_list, null=True, blank=True, verbose_name="クルマ")
+  roommate = models.CharField(max_length=20,  null=True, blank=True, verbose_name="同居人")
+  brothers_and_sisters = models.CharField(max_length=20, choices=brothers_and_sisters_list, null=True, blank=True, verbose_name="兄弟姉妹")
+  until_we_met = models.CharField(max_length=20, choices=until_we_met_list, null=True, blank=True, verbose_name="出会うまでの希望")
+  date_expenses = models.CharField(max_length=20, choices=date_expenses_list, null=True, blank=True, verbose_name="初回デート費用")
   memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
+
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
 
@@ -51,6 +104,7 @@ class Happymail(models.Model):
     verbose_name_plural = "ハッピーメール"
 
 class Pcmax(models.Model):
+  
   body_shape_list = [
     ("普通", "普通"),
     ("未設定","未設定"),

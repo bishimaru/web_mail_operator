@@ -9,7 +9,7 @@ from django.contrib.auth.admin import UserAdmin
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'registration_subscribe_date', ]
-    fields = ['gmail_account', 'gmail_account_password', 'recieve_mailaddress']  # 表示・編集可能なフィールドを指定
+    fields = ['gmail_account', 'gmail_account_password', 'recieve_mailaddress', 'h_schedule_time']  # 表示・編集可能なフィールドを指定
     
     # 任意でクエリセットを制限
     def get_queryset(self, request):
@@ -22,7 +22,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
         if not request.user.is_superuser:
-            fields = [field for field in fields if field not in ('id', 'user')]
+            fields = [field for field in fields if field not in ('id', 'user', 'h_schedule_time')]
         return fields
 admin.site.register(UserProfile, UserProfileAdmin)
 
@@ -106,7 +106,17 @@ admin.site.register(Pcmax, PcmaxAdmin)
 
 class HappymailAdmin(admin.ModelAdmin):
     list_display = ['name', 'post_title', 'login_id', 'is_active', 'memo']
-    fields = ['user_id', 'name', 'login_id', 'password', 'post_title', 'post_contents', 'return_foot_message', 'fst_message',  'is_active', 'chara_image', 'memo']
+    fields = [
+        'user_id', 'name', 'login_id', 'password', 'post_title', 
+        'post_contents', 'return_foot_message', 'fst_message',  'is_active', 
+        'chara_image', "age", "activity_area", "detail_activity_area",
+        "birth_place", "blood_type", "constellation", "height",
+        "style", "looks", "cup", "job", "education", "holiday",
+        "relationship_status", "having_children", "intention_to_marry",
+        "smoking", "sake", "car_ownership","roommate", 
+        "brothers_and_sisters", "until_we_met","date_expenses", 
+        'memo'
+        ]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
