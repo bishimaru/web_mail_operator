@@ -12,7 +12,7 @@ class Command(BaseCommand):
         for profile in profiles:
             if profile.registration_subscribe_date + timedelta(days=14) < now:
                 # self.stdout.write(f"{profile.user.username}は有効期限が切れました。{now}")
-                profile.user.is_active = False
-                profile.user.save()
+                profile.is_active = False
+                profile.save()
 
         self.stdout.write(self.style.SUCCESS('Successfully updated profiles'))

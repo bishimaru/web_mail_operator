@@ -11,6 +11,7 @@ from django.contrib.postgres.fields import ArrayField  # PostgreSQLの場合
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
+    is_active = models.BooleanField(default=True, verbose_name="アクティブ")
     lifted_account_number = models.BooleanField(default=False, verbose_name="アカウント数制限解除(16)")
     gmail_account = models.EmailField(null=True, blank=True, verbose_name="Gmailアドレス")
     gmail_account_password = models.CharField(max_length=30, blank=True, null=True, verbose_name="Gmailアプリパスワード")

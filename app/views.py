@@ -27,16 +27,16 @@ def terms_of_service_view(request):
     return render(request, template_name)
 
 
-
 class UserDataView(APIView):
     def post(self, request):
         name = request.data.get('name')
         password = request.data.get('password')
         try:
             user = User.objects.get(username=name)
+            user_option = UserProfile.objects.get(user=user)
             user_email = user.email
             
-            if not user.is_active:
+            if not user_option.is_active:
                 return Response({'error': '有効期限が切れています。'}, status=status.HTTP_204_NO_CONTENT)
 
             if user.check_password(password):
@@ -67,8 +67,7 @@ class UserDataView(APIView):
         
     def patch(self, request, *args, **kwargs):
         user_id = kwargs.get('user_id')  # URLからuser_idを取得
-        print(777)
-        print(user_id)
+        
         try:
             user = User.objects.get(id=user_id)
             user_profile = UserProfile.objects.get(user=user)
