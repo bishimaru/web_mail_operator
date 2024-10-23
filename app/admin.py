@@ -22,7 +22,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
         if not request.user.is_superuser:
-            fields = [field for field in fields if field not in ('id', 'user', 'h_schedule_time', 'is_active', 'check_mail_happymail', 'check_mail_pcmax')]
+            fields = [field for field in fields if field not in ('id', 'user', 'h_schedule_time', 'registration_subscribe_date', 'is_active', 'check_mail_happymail', 'check_mail_pcmax')]
         return fields
 admin.site.register(UserProfile, UserProfileAdmin)
 
