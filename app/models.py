@@ -134,21 +134,71 @@ class Pcmax(models.Model):
   freetime_list = [
     ("不規則で決まってない","不規則で決まってない"), ("秘密","秘密"), ("平日の昼間","平日の昼間"), ("平日の夜","平日の夜")
       ]
-  car_ownership_list = [("ない", "ない")]
-  smoking_list = [("吸わない(喫煙は気にしない)", "吸わない(喫煙は気にしない)")]
+  car_ownership_list = [
+    ("ない", "ない"),("車がある", "車がある"),("バイクがある", "バイクがある"),("車とバイク両方ある", "車とバイク両方ある"),
+    ]
+  smoking_list = [
+    ("未選択", "未選択"),("吸わない(喫煙は気にしない)", "吸わない(喫煙は気にしない)"),
+    ("吸わない(喫煙は気になる)", "吸わない(喫煙は気になる)"),("吸わない(喫煙は許せない)", "吸わない(喫煙は許せない)"),
+    ("吸わない(喫煙は気にしない)", "吸わない(喫煙は気にしない)"),("吸う（1日1箱くらい）", "吸う（1日1箱くらい）"),
+    ("吸う（1日1箱以上）", "吸う（1日1箱以上）"),("吸う（2～3日に1箱）", "吸う（2～3日に1箱）"),("吸う（気が向いた時だけ）", "吸う（気が向いた時だけ）"),
+    ("吸う（電子タバコ）", "吸う（電子タバコ）"),("禁煙中", "禁煙中"),("非喫煙者の前では吸わない", "非喫煙者の前では吸わない"),
+    ]
   ecchiness_level_list = [
-    ("積極的で好奇心旺盛","積極的で好奇心旺盛"), ("普通だけど刺激が欲しい","普通だけど刺激が欲しい"), ("普通だけど相性は大事","普通だけど相性は大事")
+    ("積極的で経験豊か","積極的で経験豊か"),("積極的で好奇心旺盛","積極的で好奇心旺盛"),("普通だし気持ちが大切","普通だし気持ちが大切"),("奥手だけど興味あり","奥手だけど興味あり"),
+     ("普通だけど刺激が欲しい","普通だけど刺激が欲しい"), ("普通だけど相性は大事","普通だけど相性は大事"),
+     ("奥手だし苦手です","奥手だし苦手です"),("まだ未経験です","まだ未経験です"),("奥手だし下ﾈﾀもNG","奥手だし下ﾈﾀもNG"),
+
       ]
   sake_list = [
-    ("たしなむ程度","たしなむ程度"), ("飲めない","飲めない"), ("飲めないが場は好き","飲めないが場は好き")
+    ("未回答","未回答"),("好き","好き"),("たしなむ程度","たしなむ程度"),
+    ("相手に合わせたい","相手に合わせたい"), ("飲めない","飲めない"), ("飲めないが場は好き","飲めないが場は好き")
       ]
   process_before_meeting_list =[
     ("まずは会ってみたい","まずは会ってみたい"), ("気が合いそうなら会ってみたい","気が合いそうなら会ってみたい")
      ]
   first_date_cost_list = [
-    ("相手と相談して決める", "相手と相談して決める"),
+    ("未回答", "未回答"),("自分が全部払う", "自分が全部払う"),("自分が多めに払う", "自分が多めに払う"),
+    ("割り勘", "割り勘"),("お相手に全部払ってもらう", "お相手に全部払ってもらう"),("お相手に多めに払ってもらう", "お相手に多めに払ってもらう"),
+    ("持っている方が払う", "持っている方が払う"),("相手と相談して決める", "相手と相談して決める"),
     ]
-
+  travel_list = [
+    ("未回答", "未回答"),("仲良くなってからなら", "仲良くなってからなら"),("予定が合えば", "予定が合えば"),("雰囲気で決める", "雰囲気で決める"),
+    ("宿泊は無理", "宿泊は無理"),("むしろ泊めて欲しい", "むしろ泊めて欲しい"),
+    ]
+  education_list = [
+    ("未回答", "未回答"),("高卒", "高卒"),("短大/専門学校", "短大/専門学校"),("大学", "大学"),
+    ("大学院", "大学院"),("その他", "その他"),
+    ]
+  annual_income_list = [
+    ("未回答", "未回答"),("200万円未満", "200万円未満"),("200万円以上～400万円未満", "200万円以上～400万円未満"),("400万円以上～600万円未満", "400万円以上～600万円未満"),
+    ("600万円以上～800万円未満", "600万円以上～800万円未満"),("800万円以上～1000万円未満", "800万円以上～1000万円未満"),
+    ("1000万円以上～1500万円未満", "1000万円以上～1500万円未満"),("1500万円以上～2000万円未満", "1500万円以上～2000万円未満"),
+    ("2000万円以上", "2000万円以上"),
+    ]
+  roommate_list = [
+    ("未回答", "未回答"),("一人暮らし", "一人暮らし"),("友達と一緒", "友達と一緒"),("家族と一緒", "家族と一緒"),
+    ("兄弟姉妹と一緒", "兄弟姉妹と一緒"),("ペットと一緒", "ペットと一緒"),
+    ("その他", "その他"),
+    ]
+  marry_list = [
+    ("未回答", "未回答"),("すぐにでもしたい", "すぐにでもしたい"),("2～3年のうちに", "2～3年のうちに"),("良い人がいればしたい", "良い人がいればしたい"),
+    ("今のところ結婚は考えていない", "今のところ結婚は考えていない"),("相手と相談して決めたい", "相手と相談して決めたい"),
+    ("以前結婚していた", "以前結婚していた"),("未婚だけどパートナーが居る", "未婚だけどパートナーが居る"),("既婚者です", "既婚者です"),
+    ]
+  child_list = [
+    ("未回答", "未回答"),("絶対に子供が欲しい", "絶対に子供が欲しい"),("どちらかというと子供が欲しい", "どちらかというと子供が欲しい"),("子供は欲しくない", "子供は欲しくない"),
+    ("相手と相談して決めたい", "相手と相談して決めたい"),("同居中の子供がいる", "同居中の子供がいる"),
+    ("別居中の子供がいる", "別居中の子供がいる"),("子供だけ欲しい（パートナー不要）", "子供だけ欲しい（パートナー不要）"),
+    ]
+  housework_list = [
+    ("未回答", "未回答"),("積極的に参加したい", "積極的に参加したい"),("できれば参加したい", "できれば参加したい"),("できれば相手に任せたい", "できれば相手に任せたい"),
+    ("相手に任せたい", "相手に任せたい"),("相手と相談して決めたい", "相手と相談して決めたい"),
+    ]
+  sociability_list = [
+    ("未回答", "未回答"),("大人数が好き", "大人数が好き"),("小人数が好き", "小人数が好き"),("ひとりが好き", "ひとりが好き"),
+    ("すぐに仲良くなる", "すぐに仲良くなる"),("徐々に仲良くなる", "徐々に仲良くなる"),
+    ]
   name = models.CharField(max_length=30, blank=True, null=True, verbose_name="名前")
   user_id = models.ForeignKey(User, on_delete=models.CASCADE)  
   login_id = models.CharField(max_length=30, blank=True, null=True, verbose_name="ログインID")
@@ -168,7 +218,7 @@ class Pcmax(models.Model):
   body_shape = models.CharField(max_length=20, choices=body_shape_list, null=True, blank=True, verbose_name="体重")
   blood_type = models.CharField(max_length=5, choices=blood_type_list, null=True, blank=True, verbose_name="血液型")
   activity_area = models.CharField(max_length=5, choices=activity_area_list, null=True, blank=True, verbose_name="活動地域")
-  detail_activity_area = models.CharField(max_length=10, blank=True, null=True)
+  detail_activity_area = models.CharField(max_length=10, blank=True, null=True, verbose_name="活動エリア(詳細)")
   profession = models.CharField(blank=True, null=True, verbose_name="職業")
   freetime = models.CharField(max_length=20, choices=freetime_list, null=True, blank=True, verbose_name="ヒマな時間帯")
   car_ownership = models.CharField(max_length=20, choices=car_ownership_list, null=True, blank=True, verbose_name="車の所有")
@@ -177,6 +227,16 @@ class Pcmax(models.Model):
   sake = models.CharField(max_length=20, choices=sake_list, null=True, blank=True, verbose_name="お酒")
   process_before_meeting = models.CharField(max_length=20, choices=process_before_meeting_list, null=True, blank=True, verbose_name="会うまでのプロセス")
   first_date_cost = models.CharField(max_length=20, choices=first_date_cost_list, null=True, blank=True, verbose_name="初回デート費用")
+  travel = models.CharField(max_length=20, choices=travel_list, null=True, blank=True, verbose_name="旅行・宿泊")
+  birth_place = models.CharField(max_length=10,  null=True, blank=True, verbose_name="出身地")
+  education = models.CharField(max_length=20, choices=education_list, null=True, blank=True, verbose_name="学歴")
+  annual_income = models.CharField(max_length=20, choices=annual_income_list, null=True, blank=True, verbose_name="年収")
+  roommate = models.CharField(max_length=20, choices=roommate_list, null=True, blank=True, verbose_name="同居人")
+  marry = models.CharField(max_length=20,  choices=marry_list, null=True, blank=True, verbose_name="結婚")
+  child = models.CharField(max_length=20,  choices=child_list, null=True, blank=True, verbose_name="子供")
+  housework = models.CharField(max_length=20,  choices=housework_list, null=True, blank=True, verbose_name="家事・育児")
+  sociability = models.CharField(max_length=20,  choices=sociability_list, null=True, blank=True, verbose_name="社交性")
+
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
   memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
 

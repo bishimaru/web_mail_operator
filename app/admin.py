@@ -8,7 +8,7 @@ from django.contrib.auth.admin import UserAdmin
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'registration_subscribe_date',  'is_active']
+    list_display = ['user', 'registration_subscribe_date',  'is_active', 'check_mail_happymail']
     fields = ['gmail_account', 'gmail_account_password', 'recieve_mailaddress', 'h_schedule_time', 'registration_subscribe_date', 'is_active', 'check_mail_happymail', 'check_mail_pcmax']  # 表示・編集可能なフィールドを指定
     
     # 任意でクエリセットを制限
@@ -62,7 +62,9 @@ class PcmaxAdmin(admin.ModelAdmin):
         'date_of_birth', 'self_promotion', 
         'height', 'body_shape', 'blood_type', 'activity_area', 'detail_activity_area', 'profession', 
         'freetime', 'car_ownership', 'smoking', 'ecchiness_level', 'sake', 'process_before_meeting', 
-        'first_date_cost', 'memo','is_active'
+        'first_date_cost', 'travel', 'birth_place', 'education', 'annual_income', 'roommate', 
+        'marry', 'child', 'housework', 'sociability', 
+        'memo','is_active'
               )
 
     def get_queryset(self, request):
@@ -108,14 +110,14 @@ class HappymailAdmin(admin.ModelAdmin):
     list_display = ['name', 'post_title', 'login_id', 'is_active', 'memo']
     fields = [
         'user_id', 'name', 'login_id', 'password', 'post_title', 
-        'post_contents', 'return_foot_message', 'fst_message', 'second_message', 'is_active', 
+        'post_contents', 'return_foot_message', 'fst_message', 'second_message', 
         'chara_image', "age", "activity_area", "detail_activity_area",
         "birth_place", "blood_type", "constellation", "height",
         "style", "looks", "cup", "job", "education", "holiday",
         "relationship_status", "having_children", "intention_to_marry",
         "smoking", "sake", "car_ownership","roommate", 
         "brothers_and_sisters", "until_we_met","date_expenses", 
-        'memo'
+        'is_active', 'memo'
         ]
 
     def get_queryset(self, request):
