@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     h_schedule_time = ArrayField(models.CharField(max_length=15), blank=True, null=True, verbose_name="ハッピー予約時間") 
 
     registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
-    is_active = models.BooleanField(default=True, verbose_name="アクティブ")
+    is_active = models.BooleanField(default=True, verbose_name="ハッピー再投稿、足跡返し")
     check_mail_happymail = models.BooleanField(default=False, verbose_name="ハッピー新着チェック")
     check_mail_pcmax = models.BooleanField(default=False, verbose_name="pcmax新着チェック")
 
