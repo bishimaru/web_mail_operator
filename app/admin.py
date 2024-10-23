@@ -9,7 +9,7 @@ from django.contrib.auth.admin import UserAdmin
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'registration_subscribe_date',  'is_active']
-    fields = ['gmail_account', 'gmail_account_password', 'recieve_mailaddress', 'h_schedule_time', 'is_active']  # 表示・編集可能なフィールドを指定
+    fields = ['gmail_account', 'gmail_account_password', 'recieve_mailaddress', 'h_schedule_time', 'registration_subscribe_date', 'is_active']  # 表示・編集可能なフィールドを指定
     
     # 任意でクエリセットを制限
     def get_queryset(self, request):
