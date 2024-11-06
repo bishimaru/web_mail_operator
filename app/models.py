@@ -19,8 +19,7 @@ class UserProfile(models.Model):
 
     registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
     is_active = models.BooleanField(default=True, verbose_name="ハッピー再投稿、足跡返し")
-    check_mail_happymail = models.BooleanField(default=False, verbose_name="ハッピー新着チェック")
-    check_mail_pcmax = models.BooleanField(default=False, verbose_name="pcmax新着チェック")
+    check_mail = models.BooleanField(default=False, verbose_name="新着チェック")
 
 
     class Meta:
