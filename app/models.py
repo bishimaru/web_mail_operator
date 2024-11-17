@@ -50,6 +50,10 @@ class Happymail(models.Model):
     ("150～154","150～154"), ("155～159","155～159"), 
     ("160～164","160～164"), ("165～169","165～169"), ("ナイショ", "ナイショ")
   ]
+  intention_to_marry_list =[
+    ("すぐにでもしたい","すぐにでもしたい"), ("2～3年のうちに","2～3年のうちに"), 
+    ("良い人がいればしたい","良い人がいればしたい"), ("わからない","わからない"), 
+  ]
   sake_list = [
     ("たしなむ程度","たしなむ程度"), ("飲まない","飲まない"), ("ときどき飲む","ときどき飲む"), ("ナイショ","ナイショ"),
       ]
@@ -88,7 +92,7 @@ class Happymail(models.Model):
   holiday = models.CharField(max_length=20,  null=True, blank=True, verbose_name="休日")
   relationship_status = models.CharField(max_length=20,  null=True, blank=True, verbose_name="交際ステータス")
   having_children = models.CharField(max_length=10,  null=True, blank=True, verbose_name="子ども")
-  intention_to_marry = models.CharField(max_length=20,  null=True, blank=True, verbose_name="結婚に対する意思")
+  intention_to_marry = models.CharField(max_length=20, choices=intention_to_marry_list, null=True, blank=True, verbose_name="結婚に対する意思")
   smoking = models.CharField(max_length=20, null=True, blank=True, verbose_name="たばこ")
   sake = models.CharField(max_length=20, choices=sake_list, null=True, blank=True, verbose_name="お酒")
   car_ownership = models.CharField(max_length=20, choices=car_ownership_list, null=True, blank=True, verbose_name="クルマ")
