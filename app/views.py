@@ -67,22 +67,28 @@ class UserDataView(APIView):
         
     def patch(self, request, *args, **kwargs):
         user_id = kwargs.get('user_id')  # URLからuser_idを取得
-        
         try:
             user = User.objects.get(id=user_id)
             user_profile = UserProfile.objects.get(user=user)
             
-            # リクエストからh_schedule_timeを取得して更新
-            h_schedule_time = request.data.get('h_schedule_time', [])
-            if not isinstance(h_schedule_time, list):
-                return Response({'error': 'h_schedule_time should be a list'}, status=status.HTTP_400_BAD_REQUEST)
-            
-            # h_schedule_timeを更新
-            user_profile.h_schedule_time = h_schedule_time
-            user_profile.save()
-            
-            return Response({'message': 'h_schedule_time updated successfully'}, status=status.HTTP_200_OK)
-        
+            # リクエストからh_schedule_time,p_schedule_timeを判別して更新
+            if request.data.get('h_schedule_time', []) != []:
+                h_schedule_time = request.data.get('h_schedule_time', [])
+                if not isinstance(h_schedule_time, list):
+                    return Response({'error': 'h_schedule_time should be a list'}, status=status.HTTP_400_BAD_REQUEST)
+                # h_schedule_timeを更新
+                user_profile.h_schedule_time = h_schedule_time
+                user_profile.save()
+                return Response({'message': 'h_schedule_time updated successfully'}, status=status.HTTP_200_OK)
+            elif request.data.get('p_schedule_time', []) != []:
+                p_schedule_time = request.data.get('p_schedule_time', [])
+                if not isinstance(p_schedule_time, list):
+                    return Response({'error': 'p_schedule_time should be a list'}, status=status.HTTP_400_BAD_REQUEST)
+                # p_schedule_timeを更新
+                user_profile.p_schedule_time = p_schedule_time
+                user_profile.save()
+                return Response({'message': 'h_schedule_time updated successfully'}, status=status.HTTP_200_OK)
+
         except UserProfile.DoesNotExist:
             return Response({'error': 'UserProfile not found'}, status=status.HTTP_404_NOT_FOUND)
         except User.DoesNotExist:
