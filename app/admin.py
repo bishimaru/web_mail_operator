@@ -205,12 +205,12 @@ class JmailAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
     
-    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
-    #     # スーパーユーザー以外は user_id を自動的に設定し、編集不可にする
-    #     if db_field.name == 'user_id' and not request.user.is_superuser:
-    #         kwargs['initial'] = request.user.id
-    #         kwargs['disabled'] = True  # フィールドを編集不可に設定
-    #     return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        # スーパーユーザー以外は user_id を自動的に設定し、編集不可にする
+        if db_field.name == 'user_id' and not request.user.is_superuser:
+            kwargs['initial'] = request.user.id
+            kwargs['disabled'] = True  # フィールドを編集不可に設定
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_list_display(self, request):
         # スーパーユーザーのみ user_id を表示
