@@ -251,3 +251,25 @@ class Pcmax(models.Model):
     db_table = 'pcmax'
     verbose_name = "PCMAX"
     verbose_name_plural = "PCMAX"
+
+class Jmail(models.Model):
+
+  name = models.CharField(max_length=30, blank=True, null=True, verbose_name="名前")
+  user_id = models.ForeignKey(User, on_delete=models.CASCADE)  
+  login_id = models.CharField(max_length=30, blank=True, null=True, verbose_name="ログインID")
+  password = models.CharField(max_length=30, blank=True, null=True, verbose_name="パスワード")
+  fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
+  return_foot_message = models.TextField(blank=True, null=True, verbose_name="足跡返し")
+  conditions_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
+  post_title = models.CharField(max_length=30,blank=True, null=True, verbose_name="掲示板タイトル")
+  post_contents = models.TextField(blank=True, null=True, verbose_name="掲示板内容文")
+  is_active = models.BooleanField(default=True, verbose_name="アクティブ")
+  memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
+  def __str__(self):
+    return self.name  # ここで表示したいフィールドを選択します
+  
+  class Meta:
+    managed = True
+    db_table = 'jmail'
+    verbose_name = "Jmail"
+    verbose_name_plural = "Jmail"
