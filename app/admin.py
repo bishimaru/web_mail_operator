@@ -182,4 +182,41 @@ class JmailAdmin(admin.ModelAdmin):
         'post_contents', 'return_foot_message', 'fst_message', 'conditions_message', 
         'memo'
         ]
+    def get_queryset(self, request):
+        # スーパーユーザーは全データを表示
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        # 一般ユーザーは自分のデータのみ表示
+        return qs.filter(user_id=request.user)
+
+    def save_model(self, request, obj, form, change):
+        print(777)
+        # 新規作成時に user_id を自動的に設定
+        if not obj.pk:  # 新しいオブジェクトの場合のみ
+            obj.user_id = request.user
+        super().save_model(request, obj, form, change)
+
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        print(888)
+        # スーパーユーザー以外は user_id フィールドを表示しない
+        if not request.user.is_superuser:
+            fields = [field for field in fields if field not in ('user_id',)]
+        print(fields)
+        return fields
+
+    def get_list_display(self, request):
+        # スーパーユーザーのみ user_id を表示
+        if request.user.is_superuser:
+            return ['user_id'] + self.list_display
+        return self.list_display
+
+    def get_list_display(self, request):
+        # スーパーユーザーのみ user_id を表示
+        if request.user.is_superuser:
+            # return ['user_id'] + self.list_display
+            return ['user_id'] + list(self.list_display) 
+            
+        return self.list_display
 admin.site.register(Jmail, JmailAdmin)

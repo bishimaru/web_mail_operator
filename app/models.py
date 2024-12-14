@@ -7,7 +7,6 @@ from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField  # PostgreSQLの場合
 
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     lifted_account_number = models.BooleanField(default=False, verbose_name="アカウント数制限解除(16)")
@@ -19,7 +18,6 @@ class UserProfile(models.Model):
     registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
     is_active = models.BooleanField(default=True, verbose_name="ハッピー再投稿、足跡返し")
     check_mail = models.BooleanField(default=False, verbose_name="新着チェック")
-
 
     class Meta:
       managed = True
@@ -265,6 +263,7 @@ class Jmail(models.Model):
   post_contents = models.TextField(blank=True, null=True, verbose_name="掲示板内容文")
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
   memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
+  
   def __str__(self):
     return self.name  # ここで表示したいフィールドを選択します
   
