@@ -182,6 +182,14 @@ class JmailAdmin(admin.ModelAdmin):
         'post_contents', 'return_foot_message', 'fst_message', 'conditions_message', 
         'memo'
         ]
+    
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        # スーパーユーザー以外は user_id フィールドを表示しない
+        if not request.user.is_superuser:
+            fields = [field for field in fields if field not in ('user_id',)]
+        return fields
+    
     def get_queryset(self, request):
         # スーパーユーザーは全データを表示
         qs = super().get_queryset(request)
@@ -191,20 +199,18 @@ class JmailAdmin(admin.ModelAdmin):
         return qs.filter(user_id=request.user)
 
     def save_model(self, request, obj, form, change):
-        print(777)
         # 新規作成時に user_id を自動的に設定
         if not obj.pk:  # 新しいオブジェクトの場合のみ
             obj.user_id = request.user
         super().save_model(request, obj, form, change)
 
-    def get_fields(self, request, obj=None):
-        fields = super().get_fields(request, obj)
-        print(888)
-        # スーパーユーザー以外は user_id フィールドを表示しない
-        if not request.user.is_superuser:
-            fields = [field for field in fields if field not in ('user_id',)]
-        print(fields)
-        return fields
+    
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #     # スーパーユーザー以外は user_id を自動的に設定し、編集不可にする
+    #     if db_field.name == 'user_id' and not request.user.is_superuser:
+    #         kwargs['initial'] = request.user.id
+    #         kwargs['disabled'] = True  # フィールドを編集不可に設定
+    #     return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_list_display(self, request):
         # スーパーユーザーのみ user_id を表示
