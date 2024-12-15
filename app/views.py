@@ -49,8 +49,8 @@ class UserDataView(APIView):
                 
                 pcmax_data = Pcmax.objects.filter(user_id=user.id, is_active=True)
                 pcmax_serializer = PcmaxSerializer(pcmax_data, many=True)
-                
-                jmail_data = Pcmax.objects.filter(user_id=user.id, is_active=True)
+
+                jmail_data = Jmail.objects.filter(user_id=user.id, is_active=True)
                 jmail_serializer = JmailSerializer(jmail_data, many=True)
                 
                 userprofile_serializer.data[0]["username"] = name
