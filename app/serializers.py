@@ -16,6 +16,11 @@ class PcmaxSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pcmax
         fields = '__all__'
+        
+class JmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Jmail
+        fields = '__all__'
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
