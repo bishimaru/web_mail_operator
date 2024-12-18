@@ -176,11 +176,11 @@ class HappymailAdmin(admin.ModelAdmin):
 admin.site.register(Happymail, HappymailAdmin)
 
 class JmailAdmin(admin.ModelAdmin):
-    list_display = ['name',  'login_id', 'is_active', 'is_active','memo']
+    list_display = ['name',  'login_id', 'is_active','memo']
     fields = [
         'user_id', 'name', 'login_id', 'password', 'post_title', 
         'post_contents', 'return_foot_message', 'fst_message', 'conditions_message', 
-        'memo'
+        'is_active', 'memo'
         ]
     
     def get_fields(self, request, obj=None):
