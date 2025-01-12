@@ -210,7 +210,7 @@ class Pcmax(models.Model):
   second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
   condition_message = models.TextField(blank=True, null=True, verbose_name="アドレス内1stメール")
   return_foot_message = models.TextField(blank=True, null=True, verbose_name="足跡返し")
-  mail_address = models.EmailField(blank=True, null=True, verbose_name="Gmaliアドレス")
+  mail_address = models.EmailField(blank=True, null=True, verbose_name="Gmailアドレス")
   gmail_password = models.CharField(max_length=20,blank=True, null=True, verbose_name="Gmailパスワード")
   date_of_birth = models.IntegerField(blank=True, null=True, verbose_name="誕生日(８桁の数字)")
   self_promotion = models.TextField(blank=True, null=True, verbose_name="自己紹介")
@@ -273,3 +273,24 @@ class Jmail(models.Model):
     db_table = 'jmail'
     verbose_name = "Jmail"
     verbose_name_plural = "Jmail"
+
+class Ikukuru(models.Model):
+  
+  name = models.CharField(max_length=30, blank=True, null=True, verbose_name="名前")
+  user_id = models.ForeignKey(User, on_delete=models.CASCADE)  
+  login_mailaddress = models.EmailField(null=True, blank=True, verbose_name="メールアドレス")
+  password = models.CharField(max_length=30, blank=True, null=True, verbose_name="パスワード")
+  fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
+  second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
+ 
+  is_active = models.BooleanField(default=True, verbose_name="アクティブ")
+  memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
+  
+  def __str__(self):
+    return "イククル" # ここで表示したいフィールドを選択します
+  
+  class Meta:
+    managed = True
+    db_table = 'Ikukuru'
+    verbose_name = "Ikukuru"
+    verbose_name_plural = "Ikukuru"

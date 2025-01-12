@@ -226,3 +226,55 @@ class JmailAdmin(admin.ModelAdmin):
             
         return self.list_display
 admin.site.register(Jmail, JmailAdmin)
+
+class IkukuruAdmin(admin.ModelAdmin):
+    list_display = ['name',  'login_mailaddress', 'is_active','memo']
+    fields = [
+        'user_id', 'name', 'login_mailaddress', 'password',  
+        'fst_message',  'second_message', 
+        'is_active', 'memo'
+        ]
+    
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        # スーパーユーザー以外は user_id フィールドを表示しない
+        if not request.user.is_superuser:
+            fields = [field for field in fields if field not in ('user_id',)]
+        return fields
+    
+    def get_queryset(self, request):
+        # スーパーユーザーは全データを表示
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        # 一般ユーザーは自分のデータのみ表示
+        return qs.filter(user_id=request.user)
+
+    def save_model(self, request, obj, form, change):
+        # 新規作成時に user_id を自動的に設定
+        if not obj.pk:  # 新しいオブジェクトの場合のみ
+            obj.user_id = request.user
+        super().save_model(request, obj, form, change)
+
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        # スーパーユーザー以外は user_id を自動的に設定し、編集不可にする
+        if db_field.name == 'user_id' and not request.user.is_superuser:
+            kwargs['initial'] = request.user.id
+            kwargs['disabled'] = True  # フィールドを編集不可に設定
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_list_display(self, request):
+        # スーパーユーザーのみ user_id を表示
+        if request.user.is_superuser:
+            return ['user_id'] + self.list_display
+        return self.list_display
+
+    def get_list_display(self, request):
+        # スーパーユーザーのみ user_id を表示
+        if request.user.is_superuser:
+            # return ['user_id'] + self.list_display
+            return ['user_id'] + list(self.list_display) 
+            
+        return self.list_display
+admin.site.register(Ikukuru, IkukuruAdmin)
