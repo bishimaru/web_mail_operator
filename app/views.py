@@ -52,6 +52,9 @@ class UserDataView(APIView):
 
                 jmail_data = Jmail.objects.filter(user_id=user.id, is_active=True)
                 jmail_serializer = JmailSerializer(jmail_data, many=True)
+
+                ikukuru_data = Ikukuru.objects.filter(user_id=user.id, is_active=True)
+                ikukuru_serializer = IkukuruSerializer(ikukuru_data, many=True)
                 
                 userprofile_serializer.data[0]["username"] = name
                 userprofile_serializer.data[0]["password"] = password
@@ -61,6 +64,7 @@ class UserDataView(APIView):
                     'happymail': happymail_serializer.data,
                     'pcmax': pcmax_serializer.data,
                     'jmail': jmail_serializer.data,
+                    'ikukuru': ikukuru_serializer.data,
                     "user":userprofile_serializer.data,
 
 
