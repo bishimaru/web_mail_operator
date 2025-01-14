@@ -275,14 +275,15 @@ class Jmail(models.Model):
     verbose_name_plural = "Jmail"
 
 class Ikukuru(models.Model):
-  
   name = models.CharField(max_length=30, blank=True, null=True, verbose_name="名前")
   user_id = models.ForeignKey(User, on_delete=models.CASCADE)  
-  login_mailaddress = models.EmailField(null=True, blank=True, verbose_name="メールアドレス")
+  login_mail_address = models.EmailField(null=True, blank=True, verbose_name="メールアドレス")
   password = models.CharField(max_length=30, blank=True, null=True, verbose_name="パスワード")
   fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
   second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
- 
+  condition_message = models.TextField(blank=True, null=True, verbose_name="アドレス内1stメール")
+  gmail_address = models.EmailField(null=True, blank=True, verbose_name="gmailアドレス")
+  gmail_password = models.CharField(max_length=20,blank=True, null=True, verbose_name="Gmailパスワード")
   is_active = models.BooleanField(default=True, verbose_name="アクティブ")
   memo = models.CharField(max_length=30,blank=True, null=True, verbose_name="メモ")
   
