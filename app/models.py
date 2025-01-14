@@ -277,8 +277,8 @@ class Jmail(models.Model):
 class Ikukuru(models.Model):
   name = models.CharField(max_length=30, blank=True, null=True, verbose_name="名前")
   user_id = models.ForeignKey(User, on_delete=models.CASCADE)  
-  login_mail_address = models.EmailField(null=True, blank=True, verbose_name="メールアドレス")
-  password = models.CharField(max_length=30, blank=True, null=True, verbose_name="パスワード")
+  login_mail_address = models.EmailField(null=True, blank=True, verbose_name="ログインメールアドレス")
+  password = models.CharField(max_length=30, blank=True, null=True, verbose_name="ログインパスワード")
   fst_message = models.TextField(blank=True, null=True, verbose_name="1stメール")
   second_message = models.TextField(blank=True, null=True, verbose_name="2stメール")
   condition_message = models.TextField(blank=True, null=True, verbose_name="アドレス内1stメール")

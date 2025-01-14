@@ -231,8 +231,9 @@ class IkukuruAdmin(admin.ModelAdmin):
     list_display = ['name',  'login_mail_address', 'is_active','memo']
     fields = [
         'user_id', 'name', 'login_mail_address', 'password',  
-        'fst_message',  'second_message', 
-        'is_active', 'memo'
+        'fst_message',  'second_message', 'condition_message',
+        'gmail_address', 'gmail_password',
+        'is_active', 'memo',
         ]
     
     def get_fields(self, request, obj=None):
