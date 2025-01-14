@@ -228,7 +228,7 @@ class JmailAdmin(admin.ModelAdmin):
 admin.site.register(Jmail, JmailAdmin)
 
 class IkukuruAdmin(admin.ModelAdmin):
-    list_display = ['name',  'login_mailaddress', 'is_active','memo']
+    list_display = ['name',  'login_mail_address', 'is_active','memo']
     fields = [
         'user_id', 'name', 'login_mailaddress', 'password',  
         'fst_message',  'second_message', 
