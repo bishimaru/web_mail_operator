@@ -230,7 +230,7 @@ admin.site.register(Jmail, JmailAdmin)
 class IkukuruAdmin(admin.ModelAdmin):
     list_display = ['name',  'login_mail_address', 'is_active','memo']
     fields = [
-        'user_id', 'name', 'login_mailaddress', 'password',  
+        'user_id', 'name', 'login_mail_address', 'password',  
         'fst_message',  'second_message', 
         'is_active', 'memo'
         ]
