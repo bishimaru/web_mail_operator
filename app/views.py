@@ -56,10 +56,6 @@ class UserDataView(APIView):
                 ikukuru_data = Ikukuru.objects.filter(user_id=user.id, is_active=True)
                 ikukuru_serializer = IkukuruSerializer(ikukuru_data, many=True)
 
-                user_option = UserProfile.objects.filter(user_id=user.id)
-                user_optin_serializer = 
-
-
                 # print(userprofile_serializer.data,)
                 return Response({
                     'happymail': happymail_serializer.data,
