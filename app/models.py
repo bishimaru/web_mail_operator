@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     lifted_account_number = models.BooleanField(default=False, verbose_name="アカウント数制限解除(16)")
     gmail_account = models.EmailField(null=True, blank=True, verbose_name="Gmailアドレス")
     gmail_account_password = models.CharField(max_length=30, blank=True, null=True, verbose_name="Gmailアプリパスワード")
-    recieve_mailaddress = models.EmailField(null=True, blank=True, verbose_name="受信用メールアドレス")
+    user_email = models.EmailField(null=True, blank=True, verbose_name="受信用メールアドレス")
     h_schedule_time = ArrayField(models.CharField(max_length=15), blank=True, null=True, verbose_name="ハッピー予約時間") 
     p_schedule_time = ArrayField(models.CharField(max_length=15), blank=True, null=True, verbose_name="PCMAX予約時間") 
     registration_subscribe_date = models.DateField(verbose_name="課金日", null=True, blank=True)
