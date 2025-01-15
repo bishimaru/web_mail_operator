@@ -41,6 +41,10 @@ class UserDataView(APIView):
             if user.check_password(password):
                 userprofile_data = UserProfile.objects.filter(user=user)
                 userprofile_serializer = UserProfileSerializer(userprofile_data, many=True)
+                # 次回のアップデートでuser_emailと統合する
+                userprofile_serializer.data["recieve_mailaddress"] = userprofile_serializer.data["user_email"]
+                print(userprofile_serializer.data)
+
                 happymail_data = Happymail.objects.filter(user_id=user.id, is_active=True)
                 # happymail_serializer = HappymailSerializer(happymail_data, many=True)
                 # リクエストコンテキストをシリアライザに渡す
