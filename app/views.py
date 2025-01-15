@@ -34,7 +34,6 @@ class UserDataView(APIView):
         try:
             user = User.objects.get(username=name)
             user_option = UserProfile.objects.get(user=user)
-            user_email = user.email
             
             if not user_option.is_active:
                 return Response({'error': '有効期限が切れています。'}, status=status.HTTP_204_NO_CONTENT)
