@@ -1,14 +1,10 @@
 from django.shortcuts import render
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import *
-from rest_framework import viewsets
 from .serializers import *
 from rest_framework.response import Response
 from rest_framework import status

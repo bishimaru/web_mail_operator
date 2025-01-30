@@ -37,3 +37,8 @@ class IkukuruSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ikukuru
         fields = '__all__'
+
+class UserOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

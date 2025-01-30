@@ -19,6 +19,11 @@ class UserProfile(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="ハッピー再投稿、足跡返し")
     check_mail = models.BooleanField(default=False, verbose_name="新着チェック")
 
+    def save_model(self, request, obj, form, change):
+      if not obj.user_id:  # user フィールドが未設定の場合
+          obj.user = request.user  # 管理者自身を設定
+      super().save_model(request, obj, form, change)
+      
     class Meta:
       managed = True
       verbose_name = "ユーザーオプション"
